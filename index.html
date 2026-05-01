@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Election Guide Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-label="Election guide overview">
+        <div class="hero-media">
+          <img src="assets/civic-assistant-hero.png" alt="Illustration of people using a civic information kiosk with election process symbols">
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Challenge 2</p>
+          <h1>Election Guide Assistant</h1>
+          <p>
+            A friendly, step-by-step assistant for understanding voter registration,
+            timelines, polling options, ballot preparation, and what happens after voting.
+          </p>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Interactive election assistant">
+        <aside class="panel topic-panel" aria-label="Common election topics">
+          <div class="panel-heading">
+            <span class="panel-icon" aria-hidden="true">?</span>
+            <h2>Ask About</h2>
+          </div>
+          <div class="topic-list" id="topicList"></div>
+        </aside>
+
+        <section class="assistant-panel" aria-label="Chat assistant">
+          <div class="chat-header">
+            <div>
+              <p class="eyebrow">Interactive helper</p>
+              <h2>What would you like to understand?</h2>
+            </div>
+            <button class="icon-button" id="resetChat" type="button" aria-label="Reset conversation" title="Reset conversation">
+              <span aria-hidden="true">R</span>
+            </button>
+          </div>
+
+          <div class="quick-actions" aria-label="Suggested questions">
+            <button type="button" data-question="What are the main steps to vote?">Main steps</button>
+            <button type="button" data-question="How do election timelines usually work?">Timeline</button>
+            <button type="button" data-question="What should I check before election day?">Checklist</button>
+          </div>
+
+          <div class="chat-log" id="chatLog" aria-live="polite"></div>
+
+          <form class="chat-form" id="chatForm">
+            <label class="sr-only" for="questionInput">Ask a question</label>
+            <input id="questionInput" name="question" type="text" autocomplete="off" placeholder="Ask about registration, ballots, polling places, results...">
+            <button type="submit">Ask</button>
+          </form>
+        </section>
+
+        <aside class="panel progress-panel" aria-label="Voting preparation steps">
+          <div class="panel-heading">
+            <span class="panel-icon" aria-hidden="true">OK</span>
+            <h2>Prep Tracker</h2>
+          </div>
+          <div class="step-list" id="stepList"></div>
+        </aside>
+      </section>
+
+      <section class="timeline" aria-label="Election timeline">
+        <div class="section-title">
+          <p class="eyebrow">Process map</p>
+          <h2>Typical Election Journey</h2>
+        </div>
+        <div class="timeline-grid" id="timelineGrid"></div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
