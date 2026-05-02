@@ -290,14 +290,14 @@ if "messages" not in st.session_state:
 with st.sidebar:
     st.subheader("Ask About")
     for label, question in TOPICS.items():
-        if st.button(label, use_container_width=True):
+        if st.button(label, width="stretch"):
             add_assistant_answer(question)
 
     st.divider()
     st.subheader("Readiness Tracker")
     readiness_values = {}
-    for title, detail in PREP_STEPS:
-        readiness_values[title] = st.checkbox(title, help=detail)
+    for index, (title, detail) in enumerate(PREP_STEPS, start=1):
+        readiness_values[title] = st.checkbox(title, help=detail, key=f"readiness_{index}")
     score = readiness_score(readiness_values)
     st.progress(score / 100)
     st.caption(f"{score}% ready based on checked steps")
@@ -305,7 +305,7 @@ with st.sidebar:
 left, right = st.columns([1.15, 0.85])
 with left:
     if HERO_IMAGE.exists():
-        st.image(str(HERO_IMAGE), use_container_width=True)
+        st.image(str(HERO_IMAGE), width="stretch")
 with right:
     st.markdown('<div class="eyebrow">Challenge 2</div>', unsafe_allow_html=True)
     st.markdown('<h1 class="hero-title">Election Guide Assistant</h1>', unsafe_allow_html=True)
@@ -334,7 +334,7 @@ with guide_tab:
         "What is a provisional ballot?",
     ]
     for column, question in zip(quick_cols, quick_questions):
-        if column.button(question, use_container_width=True):
+        if column.button(question, width="stretch"):
             add_assistant_answer(question)
 
     for message in st.session_state.messages:
@@ -388,7 +388,7 @@ with plan_tab:
 
     st.markdown("#### Recommended next actions")
     for index, item in enumerate(items, start=1):
-        st.checkbox(item, key=f"plan_item_{index}")
+        st.checkbox(item, key=f"plan_item_{method}_{index}")
 
     days_until = (target_date - date.today()).days
     if days_until > 0:
@@ -403,7 +403,7 @@ with plan_tab:
         data=export_plan(profile, items),
         file_name="election-guide-action-plan.md",
         mime="text/markdown",
-        use_container_width=True,
+        width="stretch",
     )
 
 with timeline_tab:
